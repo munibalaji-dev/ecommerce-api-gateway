@@ -49,38 +49,6 @@ http://localhost:9000
 | Customer Service | /api/v1/customers/** | http://localhost:3001 |
 | Product Service | /api/v2/products/** | http://localhost:3002 |
 | Order Service | /api/v3/orders/** | http://localhost:3003 |
-
----
-
-##  application.yml
-
-```yaml id="gwyaml1"
-server:
-  port: 8080
-
-spring:
-  application:
-    name: API-GATEWAY
-
-  cloud:
-    gateway:
-      server:
-        webmvc:
-          routes:
-            - id: customer-service
-              uri: http://localhost:3001
-              predicates:
-                - Path=/api/v1/customers/**
-
-            - id: product-service
-              uri: http://localhost:3002
-              predicates:
-                - Path=/api/v2/products/**
-
-            - id: order-service
-              uri: http://localhost:3003
-              predicates:
-              - Path=/api/v3/orders/**
 ---------------------------
 ##  How to Run
 
@@ -120,3 +88,33 @@ GET http://localhost:8080/api/v3/orders/1/details
 - Rate Limiting
 - Circuit Breaker (Resilience4j)
 - Centralized Logging
+-------------------------
+##  application.yml
+
+```yaml id="gwyaml1"
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: customer-service
+              uri: http://localhost:3001
+              predicates:
+                - Path=/api/v1/customers/**
+
+            - id: product-service
+              uri: http://localhost:3002
+              predicates:
+                - Path=/api/v2/products/**
+
+            - id: order-service
+              uri: http://localhost:3003
+              predicates:
+              - Path=/api/v3/orders/**
